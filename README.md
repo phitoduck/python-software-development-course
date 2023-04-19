@@ -4,6 +4,31 @@
 > change often. Check the documentation for the tool you are using if you run into problems.
 > You should really get into the habit of referring to offical docs anyway!
 
+- [Course Index - Taking Python to Production: A Professional Onboarding Guide](#course-index---taking-python-to-production-a-professional-onboarding-guide)
+  - [Unit x:](#unit-x)
+    - [Pylint Part 3 - Configuring `pylint`](#pylint-part-3---configuring-pylint)
+      - [Notes](#notes)
+      - [Assignments](#assignments)
+        - [Generate a `.pylintrc` file](#generate-a-pylintrc-file)
+        - [Configure VS Code for `pylint`](#configure-vs-code-for-pylint)
+        - [Start creating your own `pylint` ruleset](#start-creating-your-own-pylint-ruleset)
+    - [Flake8](#flake8)
+      - [Notes](#notes-1)
+      - [Assignments](#assignments-1)
+        - [Configure VS Code for Flake8](#configure-vs-code-for-flake8)
+    - [Flake8 Plugin example: Darglint](#flake8-plugin-example-darglint)
+      - [Notes](#notes-2)
+      - [Assignment](#assignment)
+    - [isort](#isort)
+      - [Notes](#notes-3)
+      - [Assignments](#assignments-2)
+        - [Configure VS Code for isort](#configure-vs-code-for-isort)
+    - [Code Complexity: Radon, Xenon, McCabe](#code-complexity-radon-xenon-mccabe)
+      - [Notes](#notes-4)
+      - [Assignments](#assignments-3)
+        - [Configure VS Code for Radon](#configure-vs-code-for-radon)
+
+
 ## Unit x: 
 
 ### Pylint Part 3 - Configuring `pylint`
