@@ -1,38 +1,28 @@
+<!-- omit in toc -->
 # Course Index - Taking Python to Production: A Professional Onboarding Guide
 
 > ⚠️ Code examples including config files and CLI tools may go out of date because tools
 > change often. Check the documentation for the tool you are using if you run into problems.
 > You should really get into the habit of referring to offical docs anyway!
 
-- [Course Index - Taking Python to Production: A Professional Onboarding Guide](#course-index---taking-python-to-production-a-professional-onboarding-guide)
-  - [Unit x:](#unit-x)
-    - [Pylint Part 3 - Configuring `pylint`](#pylint-part-3---configuring-pylint)
-      - [Notes](#notes)
-      - [Assignments](#assignments)
-        - [Generate a `.pylintrc` file](#generate-a-pylintrc-file)
-        - [Configure VS Code for `pylint`](#configure-vs-code-for-pylint)
-        - [Start creating your own `pylint` ruleset](#start-creating-your-own-pylint-ruleset)
-    - [Flake8](#flake8)
-      - [Notes](#notes-1)
-      - [Assignments](#assignments-1)
-        - [Configure VS Code for Flake8](#configure-vs-code-for-flake8)
-    - [Flake8 Plugin example: Darglint](#flake8-plugin-example-darglint)
-      - [Notes](#notes-2)
-      - [Assignment](#assignment)
-    - [isort](#isort)
-      - [Notes](#notes-3)
-      - [Assignments](#assignments-2)
-        - [Configure VS Code for isort](#configure-vs-code-for-isort)
-    - [Code Complexity: Radon, Xenon, McCabe](#code-complexity-radon-xenon-mccabe)
-      - [Notes](#notes-4)
-      - [Assignments](#assignments-3)
-        - [Configure VS Code for Radon](#configure-vs-code-for-radon)
+<!-- omit in toc -->
+## Table of Contents
+
+- [Unit 8 - Using automation to make continuous integration (the code review part) easier](#unit-8---using-automation-to-make-continuous-integration-the-code-review-part-easier)
+  - [Pylint Part 3 - Configuring `pylint`](#pylint-part-3---configuring-pylint)
+  - [Flake8](#flake8)
+  - [Flake8 Plugin example: Darglint](#flake8-plugin-example-darglint)
+  - [isort](#isort)
+  - [Code Complexity: Radon, Xenon, McCabe](#code-complexity-radon-xenon-mccabe)
 
 
-## Unit x: 
+
+## Unit 8 - Using automation to make continuous integration (the code review part) easier
 
 ### Pylint Part 3 - Configuring `pylint`
 
+<!-- omit in toc -->
+<!-- omit in toc -->
 #### Notes
 
 -  List of all Pylint rules **link**
@@ -55,14 +45,17 @@
 - Avoid disabling too many rules. Try to use the defaults. This avoids "Holy War" arguments and encourages developers to learn best practices. Let tools be opinionated for you. But be pragmatic.
 - There is no "magic" `pylint` ruleset. It's up for you or your team to decide. Start by enabling *every* `pylint` rule and taking the time to learn what they mean as they come up. You can incrementally remove rules if you or your team agree they are unreasonable. But you should always understand the *why* behind the rule before you do so. Books like *Clean Code* and *Refactoring* will go a long way toward that.
 
+<!-- omit in toc -->
 #### Assignments
 
+<!-- omit in toc -->
 ##### Generate a `.pylintrc` file
 
 1. Generate the file
 2. Validate that `pylint` respects your file by disabling/enabling a specific rule
    and running it on some code you know has that violation
 
+<!-- omit in toc -->
 ##### Configure VS Code for `pylint`
 
 1. Install the `pylint` extension by Microsoft if you have not already done so.
@@ -75,6 +68,7 @@
 }
 ```
 
+<!-- omit in toc -->
 ##### Start creating your own `pylint` ruleset
 
 Apply `pylint` to some code and refactor *every* violation.
@@ -83,6 +77,7 @@ This will be slow initially, but you will learn a lot. You will find that you re
 
 ### Flake8
 
+<!-- omit in toc -->
 #### Notes
 
 - Pylint is not the only Python linter
@@ -124,8 +119,10 @@ extend-ignore =
 
 - `flake8 --config path/to/.flake8 <python files>` directs Flake8 at this file
 
+<!-- omit in toc -->
 #### Assignments
 
+<!-- omit in toc -->
 ##### Configure VS Code for Flake8
 
 1. Install the `Flake8` extension by Microsoft if you have not already done so.
@@ -142,6 +139,7 @@ extend-ignore =
 
 ### Flake8 Plugin example: Darglint
 
+<!-- omit in toc -->
 #### Notes
 
 - You can find lots of Flake8 plugins here **Link to awesome list**
@@ -166,6 +164,7 @@ extend-ignore =
 docstring_style=google
 ```
 
+<!-- omit in toc -->
 #### Assignment
 
 This is completely optional. If this assignment does not seem interesting, skip ahead.
@@ -176,6 +175,7 @@ This is completely optional. If this assignment does not seem interesting, skip 
 
 ### isort
 
+<!-- omit in toc -->
 #### Notes
 
 - `isort` is a standalone CLI tool for organizing imports
@@ -197,8 +197,10 @@ line_length = 99
 profile = black
 ```
 
+<!-- omit in toc -->
 #### Assignments
 
+<!-- omit in toc -->
 ##### Configure VS Code for isort
 
 1. Install the `isort` extension by Microsoft if you have not already done so.
@@ -228,6 +230,7 @@ Example `.isort.cfg` file:
 
 ### Code Complexity: Radon, Xenon, McCabe
 
+<!-- omit in toc -->
 #### Notes
 
 - Clean code is secure, performant, and maintainable. Maintainable might be the most important. If code is easy to change, you can iterate to the others. *Readability* is key for code being easy to change. You should keep the complexity of your code low to help it be readable.
@@ -257,8 +260,10 @@ max-line-length = 99
 radon-max-cc = 10
 ```
 
+<!-- omit in toc -->
 #### Assignments
 
+<!-- omit in toc -->
 ##### Configure VS Code for Radon
 
 1. Install radon with `pip install radon`
