@@ -1,6 +1,8 @@
 <!-- omit in toc -->
 # Course Index - Taking Python to Production: A Professional Onboarding Guide
 
+> ⚠️ Disclaimer: This document is a work in progress. It is not yet complete, but will be before the course moved out of beta. ⚠️
+
 > ⚠️ Code examples including config files and CLI tools may go out of date because tools
 > change often. Check the documentation for the tool you are using if you run into problems.
 > You should really get into the habit of referring to offical docs anyway!
