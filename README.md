@@ -14,6 +14,10 @@
   - [Flake8 Plugin example: Darglint](#flake8-plugin-example-darglint)
   - [isort](#isort)
   - [Code Complexity: Radon, Xenon, McCabe](#code-complexity-radon-xenon-mccabe)
+  - [Typing Part 1 - type hints, autocompletion, static vs dynamic type checking, and interpreted vs compiled](#typing-part-1---type-hints-autocompletion-static-vs-dynamic-type-checking-and-interpreted-vs-compiled)
+  - [Typing Part 2 - mypy and basic typing](#typing-part-2---mypy-and-basic-typing)
+  - [Typing Part 3 - Simple ("primitive" or "builtin") types and Complex ("generic") types](#typing-part-3---simple-primitive-or-builtin-types-and-complex-generic-types)
+  - [Typing Part 4 - Union and Optional](#typing-part-4---union-and-optional)
 
 
 
@@ -274,3 +278,159 @@ radon-max-cc = 10
 5. Write a `.flake8` file that configures Radon with a max complexity threshold
 6. Validate your configuration file by writing code that gets a red squiggly line to appear when you go over your max CC threshold
 
+### Typing Part 1 - type hints, autocompletion, static vs dynamic type checking, and interpreted vs compiled
+
+<!-- omit in toc -->
+#### Notes
+
+- Python 3.5 introduced type hints to the language with syntax like 
+  - `num: float = 10.0` or 
+  - `def foo(a: int, b: str) -> bool:`
+- Type hints enable your IDE to give you autocompletion (putting a `.` after a variable and seeing a list of methods/properties that are available on that variable)
+- Popular libraries that were ported from Python 2 (or <3.5) struggled to apply type hints (Pandas, SQLAlchemy, Numpy, Flask, etc.).
+  When Python 3.5 came out, many popular libraries were displaced by new libraries that used the statement "we have autocompletion all the way down" as a selling point. FastAPI and Typer are examples of this.
+- There is research indicating that adding type information to your code prevents a large number of bugs from ever occuring.
+- Lack of autocompletion in a codebase adds significant cognitive load for maintainers and customers.
+  - Developers can work around this by "make round trips" to documentation sites as they reference the docs, but this slows down development.
+
+<!-- omit in toc -->
+#### Assignments
+
+No assignments.
+
+### Typing Part 2 - mypy and basic typing
+
+<!-- omit in toc -->
+#### Notes
+
+- [PEP 484](https://peps.python.org/pep-0484/) is the design document that introduced type hints to Python
+  - It assures Python developers that type annotations will never be mandatory, even by convention
+  - Applying thorough type hints to your code usually requires you to
+    structure your code in a way that is conducive to typing. This usually makes your code more readable. However,
+    sometimes it forces you to complicate your code or prevents you from using "magic" that is not typeable.
+    Developers should always have the option not to use type hints if there is a *compelling* reason not to.
+- `mypy` is a static type checker for Python.
+  - It is a CLI tool that you can run against code to find type violations. E.g. `num: float = "I'm not a float!"` would be a type violation.
+  - There is also a VS Code extension for `mypy` that adds red squiggly lines for typing violations.
+- `mypy` is considered Python's official "reference implementation" for a type checker:
+  - Facebook wrote `wasabi`
+  - Google wrote `pyre`
+  - Microsoft wrote `pyright`, which is the type checker that powers VS Code's Python type checking in the Pylance (which is bundled with the official "Python" extension by Microsoft).
+
+<!-- omit in toc -->
+#### Assignments
+
+1. Install `mypy` with `pip install mypy`, ideally in a virtual environment
+2. Run `mypy` against some code that has type violations. For example, 
+
+```python
+# file.py
+
+num: float = "I'm not a float!"`
+```
+
+3. Install the `mypy` extension for VS Code if you have not already
+4. Validate your installation of of the VS Code extension by viewing a red squiggly line in the file from step (2).
+
+### Typing Part 3 - Simple ("primitive" or "builtin") types and Complex ("generic") types
+
+<!-- omit in toc -->
+#### Notes
+
+- This video covers [the first typing section of the mypy docs](https://mypy.readthedocs.io/en/stable/builtin_types.html)
+  - The video is commentary on this page. If that does not sound valuable to you, you could read the documentation and skip ahead.
+- We look at some basic types, i.e. `int`, `str`, `float`, `bytes`, `bool`, `Any`
+- And some complex types, e.g. `Dict[str, int]`, `Dict[str, Set[int]]`
+- "Broad" vs "Narrow" types, e.g.
+  - `Iterable` vs `Set`, `List`, `Tuple`, etc.
+  - `Sequence` vs `List`, `Tuple`
+  - `Mapping` vs `Dict`
+  - `Any` is the most broad type including all other types
+- Make your type annotations as narrow as possible to get the best autocompletion
+- Avoid using the `Any` type as much as you possible can
+- `Type` is used like this:
+
+```python
+class Animal:
+    ...
+
+# the entire class is type-hinted like this
+my_class: Type[Animal]  = Animal
+
+# an instance of the class is type-hinted like this
+squirrel: Animal = Animal()
+```
+
+<!-- omit in toc -->
+#### Assignments
+
+Read [this page](https://mypy.readthedocs.io/en/stable/builtin_types.html) of the mypy documentation.
+
+### Typing Part 4 - Union and Optional
+
+<!-- omit in toc -->
+#### Notes
+
+- "Type inference" is a process that static analyzers use to make guesses about which type a variable *should* be based on how it is used. Pylance does type inference. To see Pylance's guess at what type your variables are, hover over that variable with your cursor.
+  - Type inference is not perfect. Hand-written type annotations are better.
+
+```python
+floats = 1.0, 2.0, 3.0,
+```
+
+Pylance's type inference for this is
+
+```python
+from typing import Literal, Tuple
+
+floats: Tuple[Literal[1.0], Literal[2.0], Literal[3.0]]
+```
+
+But this is not a useful type annotation. It would likely be better to annotate it like this
+
+```python
+# assuming the tuple is of arbitrary length
+floats: Tuple[float, ...]
+
+# OR
+
+# assuming the typle is of length 3
+floats: Tuple[float, float, float]
+```
+
+- There is also a `Union` type. For example
+
+```python
+# pre-Python 3.10
+from typing import List
+values: List[Union[int, float, str]] = [1, 1.0, "hi", 2.0, "hello",]
+
+# Python 3.10+
+values: list[int | float | str] = [1, 1.0, "hi", 2.0, "hello",]
+```
+
+- I recommend avoiding the 3.10+ syntax since many Python environments (AWS Lambda, certain Docker images, certain Linux machines, etc.) do not support Python versions that high yet.
+  - The newer language features make your code not backwards compatible with older versions of Python.
+- `Optional` is a type that is used to indicate that a variable can be `None`. For example
+
+```python
+# pre-Python 3.10
+from typing import Optional
+maybe_num: Optional[int] = None
+maybe_num = 1
+
+# OR
+
+from typing import Union
+maybe_num: Union[int, None] = None
+maybe_num = 1
+
+# Python 3.10+
+maybe_num: int | None = None
+maybe_num = 1
+```
+
+<!-- omit in toc -->
+#### Assignments
+
+No assignments.
